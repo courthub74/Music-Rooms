@@ -108,6 +108,7 @@ export default class CreateRoomPage extends Component {
               </FormHelperText>
             </FormControl>
           </Grid>
+          </Grid>
 
           <Grid item xs={12} align="center">
             <Button color="primary" variant="contained" onClick={this.handleRoomButtonPressed}>
@@ -120,9 +121,7 @@ export default class CreateRoomPage extends Component {
               Back 
             </Button>
           </Grid>
-
-
-          </Grid>
+          
         </Grid>
     );
   }
