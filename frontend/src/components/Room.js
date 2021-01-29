@@ -15,9 +15,9 @@ export default class Room extends Component {
         };
         this.roomCode = this.props.match.params.roomCode;
         this.leaveButtonPressed = this.leaveButtonPressed.bind(this);
-        // this.updateShowSettings = this.updateShowSettings.bind(this);
+        this.updateShowSettings = this.updateShowSettings.bind(this);
         this.renderSettingsButton = this.renderSettingsButton.bind(this);
-        // this.renderSettings = this.renderSettings.bind(this);
+        this.renderSettings = this.renderSettings.bind(this);
         this.getRoomDetails = this.getRoomDetails.bind(this);
         this.getRoomDetails();
     }
@@ -55,6 +55,42 @@ export default class Room extends Component {
           });
       }
 
+      //UPDATE SHOW SETTINGS FUNCTION
+      updateShowSettings(value) {
+          this.setState({    //Simply modifies the 'showSettings' state to be equal to the value
+              showSettings: value,
+          });
+      }
+
+      //RENDER SETTINGS FUNCTION
+      renderSettings() {
+          return (
+              <Grid container spacing={1}>
+
+                  <Grid item xs={12} align="center">
+                    <CreateRoomPage
+                        update={true} 
+                        votesToSkip={this.state.votesToSkip}
+                        guestCanPause={this.state.guestCanPause}
+                        roomCode={this.roomCode}
+                        updateCallback={this.getRoomDetails}
+                    />     
+                  </Grid>
+
+                  <Grid item xs={12} align="center">
+                      <Button
+                        variant="contained" 
+                        color="secondary"
+                        onClick={() => this.updateShowSettings(false)}  //Changes 'ShowSettings' to false to delete it from the screen
+                      >
+                        Close 
+                      </Button>
+                  </Grid>
+
+              </Grid>
+          );
+      }
+
       //RENDER SETTINGS BUTTON FUNCTION
       renderSettingsButton(){
           return (
@@ -72,6 +108,9 @@ export default class Room extends Component {
 
 
     render() {
+        if (this.state.showSettings) {
+            return this.renderSettings();
+        }
         return (
             <Grid container spacing={1}>
             <Grid item xs={12} align="center">
